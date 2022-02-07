@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const usersRouter = require('./routers/usersRouter');
 const loginRouter = require('./routers/loginRouter');
 const categoriesRouter = require('./routers/categoriesRouter');
+const postsRouter = require('./routers/postsRouter');
 
 const errorMiddleware = require('./middlewares/errorMiddleware');
 
@@ -14,6 +15,8 @@ app.use('/user', usersRouter);
 app.use('/login', loginRouter);
 
 app.use('/categories', categoriesRouter);
+
+app.use('/post', postsRouter);
 
 app.use(errorMiddleware);
 
