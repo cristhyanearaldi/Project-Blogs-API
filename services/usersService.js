@@ -3,13 +3,9 @@ const { createAuth } = require('../middlewares/authMiddleware');
 
 const create = async ({ displayName, email, password, image }) => {
   const newUser = await User.create({ displayName, email, password, image });
-
-  if (!newUser) {
-    return { message: 'User already exists' };
-  }
-
+  
   const token = await createAuth(email, password, newUser.id);
-
+  
   return token;
 };
 
@@ -18,7 +14,13 @@ const getAll = async () => {
   return users;
 };
 
+const getById = async ({ id }) => {
+  const user = await User.findByPk(id);
+  return user;
+};
+
 module.exports = {
   create,
   getAll,
+  getById,
 };
