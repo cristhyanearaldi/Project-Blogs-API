@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const usersRouter = require('./routers/usersRouter');
 const loginRouter = require('./routers/loginRouter');
+const categoriesRouter = require('./routers/categoriesRouter');
 
 const errorMiddleware = require('./middlewares/errorMiddleware');
 
@@ -11,6 +12,8 @@ app.use(bodyParser.json());
 app.use('/user', usersRouter);
 
 app.use('/login', loginRouter);
+
+app.use('/categories', categoriesRouter);
 
 app.use(errorMiddleware);
 
