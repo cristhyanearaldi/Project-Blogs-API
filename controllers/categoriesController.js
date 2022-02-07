@@ -1,5 +1,5 @@
 const categoriesService = require('../services/categoriesService');
-const { HTTP_CREATED } = require('../utils/statusCodes');
+const { HTTP_CREATED, HTTP_OK } = require('../utils/statusCodes');
 
 const create = async (req, res, next) => {
   const { name } = req.body;
@@ -12,6 +12,17 @@ const create = async (req, res, next) => {
   }
 };
 
+const getAll = async (_req, res, next) => {
+  try {
+    const categories = await categoriesService.getAll();
+
+    return res.status(HTTP_OK).json(categories);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   create,
+  getAll,
 };
