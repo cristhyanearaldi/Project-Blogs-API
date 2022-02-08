@@ -1,6 +1,6 @@
 const Joi = require('joi');
-const { Category } = require('../models');
-const { HTTP_BAD_REQUEST } = require('../utils/statusCodes');
+const { Category, BlogPost } = require('../models');
+const { HTTP_BAD_REQUEST, HTTP_NOT_FOUND } = require('../utils/statusCodes');
 
 const postsSchema = Joi.object({
   title: Joi.string().required(),
@@ -31,7 +31,19 @@ const validateCategory = async (req, res, next) => {
   return next();
 };
 
+const validatePostExists = async (req, res, next) => {
+  const { id } = req.params;
+  const post = await BlogPost.findByPk(id);
+
+  if (!post) {
+    return res.status(HTTP_NOT_FOUND).json({ message: 'Post does not exist' });
+  }
+
+  return next();
+};
+
 module.exports = {
   validatePost,
   validateCategory,
+  validatePostExists,
 };
