@@ -1,5 +1,5 @@
 const postsService = require('../services/postsService');
-const { HTTP_CREATED } = require('../utils/statusCodes');
+const { HTTP_CREATED, HTTP_OK } = require('../utils/statusCodes');
 
 const create = async (req, res, next) => {
   const { title, content } = req.body;
@@ -13,6 +13,30 @@ const create = async (req, res, next) => {
   }
 };
 
+const getAll = async (_req, res, next) => {
+  try {
+    const posts = await postsService.getAll();
+
+    return res.status(HTTP_OK).json(posts);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getById = async (req, res, next) => {
+  const { id } = req.params;
+
+  try {
+    const post = await postsService.getById({ id });
+
+    return res.status(HTTP_OK).json(post);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   create,
+  getAll,
+  getById,
 };

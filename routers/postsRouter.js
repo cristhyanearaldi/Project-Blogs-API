@@ -6,5 +6,7 @@ const { validatePost, validateCategory } = require('../middlewares/postValidatio
 const router = express.Router({ mergeParams: true });
 
 router.post('/', verifyAuth, validatePost, validateCategory, postsController.create);
+router.get('/', verifyAuth, postsController.getAll);
+router.get('/:id', verifyAuth, postsController.getById);
 
 module.exports = router;
