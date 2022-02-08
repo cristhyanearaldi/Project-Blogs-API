@@ -51,12 +51,6 @@ const validateUpdatedPost = async (req, res, next) => {
   const post = req.body;
   const { error } = updatedPostsSchema.validate(post);
 
-  // console.log('LOGGGGGG', req.body);
-
-  // if (post.categoryIds) {
-  //   return res.status(HTTP_BAD_REQUEST).json({ message: 'Categories cannot be edited' });
-  // }
-
   if (error) {
     return res.status(HTTP_BAD_REQUEST).json({ message: error.details[0].message });
   }
