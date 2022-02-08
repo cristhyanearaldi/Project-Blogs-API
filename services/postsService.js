@@ -24,12 +24,28 @@ const getById = async ({ id }) => {
       { model: Category, as: 'categories' },
     ],
   });
-  
+
   return post;
+};
+
+const update = async (id, title, content) => {
+  await BlogPost.update(
+    { title, content },
+    { where: { id } },  
+  );
+
+  const updatedPost = await BlogPost.findByPk(id, {
+    include: [
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  });
+
+  return updatedPost;
 };
 
 module.exports = {
   create,
   getAll,
   getById,
+  update,
 };
