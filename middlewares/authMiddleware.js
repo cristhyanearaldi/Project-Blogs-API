@@ -24,7 +24,7 @@ const verifyAuth = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(authorization, SECRET);
-    req.user = decoded; // coloca o usuário em req para deixá-lo disponível
+    req.user = decoded; // coloca o usuário no obj req para deixá-lo disponível
 
     next();
   } catch (error) {

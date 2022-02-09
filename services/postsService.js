@@ -44,8 +44,6 @@ const update = async (id, title, content) => {
 };
 
 const remove = async (userId, id) => {
-  // const deletedPost = await getById(id);
-
   const deletedPost = await BlogPost.destroy(
     { where: { userId, id } },
   );

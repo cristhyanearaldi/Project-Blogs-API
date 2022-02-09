@@ -11,6 +11,7 @@ const router = express.Router({ mergeParams: true });
 
 router.post('/', validateUser, validateEmail, usersController.create);
 router.get('/', verifyAuth, usersController.getAll);
-router.get('/:id', validateUserExists, verifyAuth, usersController.getById);
+router.get('/:id', verifyAuth, validateUserExists, usersController.getById);
+router.delete('/me', verifyAuth, usersController.remove);
 
 module.exports = router;
